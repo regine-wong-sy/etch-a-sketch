@@ -8,7 +8,10 @@ function createGrid(size) {
     box.style.width = boxSize + 'px';
     box.style.height = boxSize + 'px';
     box.addEventListener('mouseover', function() {
-      box.style.backgroundColor = 'black';
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        box.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     });
     container.appendChild(box);
   }
@@ -28,5 +31,12 @@ resetButton.addEventListener('click', function() {
   createGrid(size);
 });
 
-
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Backspace') {
+    const boxes = container.querySelectorAll('div');
+    boxes.forEach(function(box) {
+      box.style.backgroundColor = '';
+    });
+  }
+});
 createGrid(16);
